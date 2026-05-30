@@ -1,6 +1,9 @@
 name: 07 - Using expressions
 
+run-name: "07 - Using expressions - | DEBUG: ${{ inputs.debug == true && 'ON' || 'OFF' }}"
+
 on: 
+    push:
     workflow_dispatch:
         inputs:
             debug:
@@ -21,3 +24,10 @@ jobs:
                     echo "Branch: ${{ github.ref_name }}"
                     echo "Commit SHA: ${{ github.sha }}"
                     echo "Runner OS: ${{ runner.os }}"
+            - name: "[debug] Print start-up data"
+              if: ${{ inputs.debug == true && github.ref_name == 'main' }}
+              run: |
+                    echo "I was triggered on the main branch and debug mode is ON"
+            - name: Greeting
+              run: |
+                    echo "Hello, ${{ github.actor }}! This is a demonstration of using expressions in GitHub Actions."
