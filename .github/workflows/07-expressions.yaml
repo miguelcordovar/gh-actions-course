@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "[debug] Print start-up data"
-              if: ${{ inputs.debug == true }}
+              if: inputs.debug == true
               run: |
                     echo "Debug mode is ON"
                     echo "Workflow: ${{ github.workflow }}"
@@ -24,7 +24,7 @@ jobs:
                     echo "Commit SHA: ${{ github.sha }}"
                     echo "Runner OS: ${{ runner.os }}"
             - name: "[debug] Print when triggered from main"
-              if: ${{ inputs.debug == true && github.ref_name == 'main' }}
+              if: inputs.debug == true && github.ref_name == 'main'
               run: |
                     echo "I was triggered on the main branch and debug mode is ON"
             - name: Greeting
